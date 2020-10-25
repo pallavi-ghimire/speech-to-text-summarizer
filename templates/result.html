@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title>Index</title>
+</head>
+
+<body>
+<div class="index-all">
+    <div class="container">
+        <div class="page-contents">
+            <div class="heading">
+                <h1>Hello, User!</h1>
+                <p>Speech-to-Text is an online tool that helps you transcribe your audio file and generate a summary of
+                    the text. Just follow these simple rules before getting started:</p>
+                <ol>
+                    <li>Your file must be of the extension .flac,
+                    </li>
+                    <li>
+                        The audio clip must be recorded in 44100Hz.
+                    </li>
+                    <li>
+                        Make sure your audio is either a formal speech, an expository/argumentative essay, a news
+                        recording, or basically anything that has a clear diction and no dialogues!
+                    </li>
+                </ol>
+            </div>
+            <div class="form-contents">
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="area">
+                                <input type="file" id="upload" name="file" accept=".flac"/>
+                                <label for="upload">
+                                    <img src="{{url_for('static', filename='upload.png')}}"><br>Upload Here<br>
+                                    <div class="browse-button">Browse</div>
+                                </label>
+                            </div>
+                            <div id="input-file-name"></div>
+                            <div>Enter the percentage of sentences you want in your summary: </div><br>
+                            <input class="form-control" type="number" required name="percentage" placeholder="Enter here.."><br>
+                            <input type="submit" id="summarize" value="Start Summarization!">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="summary">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>The entire text:</h3>
+                        <p id="text">
+                            {{ content }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Here's Your Summary!</h3>
+                        <p id="all">
+                            {{ gist }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="{{url_for('static', filename='scripts.js')}}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+</html>
